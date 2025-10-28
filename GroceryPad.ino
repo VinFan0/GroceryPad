@@ -35,15 +35,7 @@ GxEPD2_BW<GxEPD2_370_GDEY037T03, GxEPD2_370_GDEY037T03::HEIGHT> display(GxEPD2_3
 */
 #include <WiFi.h>
 #include <WebServer.h>
-
-// #define __HOME_NETWORK_
-#ifdef __HOME_NETWORK_
-const char* ssid = "B-Fiber 2.4";
-const char* password = "WEST=COOK=MINE";
-#else
-const char* ssid = "Journal";
-const char* password = "plain,stars,neighbor";
-#endif
+#include "network.h"
 
 WebServer server(80);
 
@@ -135,16 +127,6 @@ void drawGroceryList() {
 void setup() {
   Serial.begin(115200);
 
-  // E-Paper Display
-  display.init(115200,true,50,false);
-  display.setRotation(2);
-  display.setFont(&FreeMonoBold9pt7b);
-  display.setTextColor(GxEPD_BLACK);
-  display.setFullWindow();
-
-  // Draw page outline
-  drawGroceryList();
-
   // HTTP Server
   WiFi.begin(ssid, password);
   Serial.print("Connecting to ");
@@ -158,6 +140,30 @@ void setup() {
   server.on("/reminder", HTTP_POST, handleGroceries);
   server.begin();
   Serial.println("HTTP server ready");
+
+  // E-Paper Display
+  display.init(115200,true,50,false);
+  display.setRotation(2);
+  display.setFont(&FreeMonoBold9pt7b);
+  display.setTextColor(GxEPD_BLACK);
+  
+  // HTTP Server
+  WiFi.begin(ssid, password);
+  Serial.print("Connecting to ");
+  Serial.println(ssid);
+  while (WiFi.status() != WL_CONNECTED) {
+    Serial.print(".");
+    delay(500);
+  }
+  Serial.print("IP: "); Serial.println(WiFi.localIP());
+
+  server.on("/reminder", HTTP_POST, handleGroceries);
+  server.begin();
+  Serial.println("HTTP server ready");
+  display.setFullWindow();
+
+  // Draw page outline
+  drawGroceryList();  
 }
 
 void loop() {
