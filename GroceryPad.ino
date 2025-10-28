@@ -36,18 +36,24 @@ GxEPD2_BW<GxEPD2_370_GDEY037T03, GxEPD2_370_GDEY037T03::HEIGHT> display(GxEPD2_3
 #include <WiFi.h>
 #include <WebServer.h>
 
+// #define __HOME_NETWORK_
+#ifdef __HOME_NETWORK_
 const char* ssid = "B-Fiber 2.4";
 const char* password = "WEST=COOK=MINE";
+#else
+const char* ssid = "Journal";
+const char* password = "plain,stars,neighbor";
+#endif
 
 WebServer server(80);
 
 
 void handleGroceries() {
   // Receive POST data
-  if (!server.hasArg("plain")) {
-    server.send(400, "text/plain", "Missing body");
-    return;
-  }
+  // if (!server.hasArg("plain")) {
+  //   server.send(400, "text/plain", "Missing body");
+  //   return;
+  // }
 
   String body = server.arg("plain");
   Serial.println("Raw text received:");
@@ -76,7 +82,7 @@ void handleGroceries() {
     Serial.printf("  [%d] %s\n", i, groceries[i]);
   }
 
-  server.send(200, "text/plain", "Groceries received OK");
+  server.send(200, "text/plain", "Groceries received OK\n");
 
   // Update E-Paper display
   display.firstPage();
@@ -141,7 +147,12 @@ void setup() {
 
   // HTTP Server
   WiFi.begin(ssid, password);
-  while (WiFi.status() != WL_CONNECTED) delay(500);
+  Serial.print("Connecting to ");
+  Serial.println(ssid);
+  while (WiFi.status() != WL_CONNECTED) {
+    Serial.print(".");
+    delay(500);
+  }
   Serial.print("IP: "); Serial.println(WiFi.localIP());
 
   server.on("/reminder", HTTP_POST, handleGroceries);
