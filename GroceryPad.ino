@@ -14,7 +14,6 @@
 #define ENABLE_GxEPD2_GFX 0
 
 #include <GxEPD2_BW.h>
-#include <GxEPD2_3C.h>
 #include <Fonts/FreeMonoBold9pt7b.h>
 
 // ESP32 CS(SS)=5,SCL(SCK)=18,SDA(MOSI)=23,BUSY=4,RES(RST)=19,DC=15
@@ -29,7 +28,7 @@ GxEPD2_BW<GxEPD2_370_GDEY037T03, GxEPD2_370_GDEY037T03::HEIGHT> display(GxEPD2_3
 #define START_LINE 25
 #define LINE_OFFSET 25
 #define START_GROCERY 45
-#define GROCERY_X 23
+#define GROCERY_X 15
 
 /*
 * HTTP server Module
@@ -80,7 +79,30 @@ void handleGroceries() {
   server.send(200, "text/plain", "Groceries received OK");
 
   // Update E-Paper display
+  display.firstPage();
+  do
+  {
+    display.fillScreen(GxEPD_WHITE);
 
+    display.setCursor(GROCERY_X, 15);
+    display.print("Grocery List");
+    display.fillRect(0, 22, 240, 3, GxEPD_BLACK); // Bold line
+    display.drawLine(10, 0, 10, 416, GxEPD_BLACK); // Vertical line
+
+    for (int i=0; i<16; i++) {
+      display.drawLine(0, START_LINE+LINE_OFFSET*i, 240, START_LINE+LINE_OFFSET*i, GxEPD_BLACK);
+    }
+
+    if (count == 0) {
+      display.setCursor(GROCERY_X, START_GROCERY);
+      display.print("No groceries");
+    }
+    for(int i=0; i<count; i++) {
+      display.setCursor(GROCERY_X, i*LINE_OFFSET + START_GROCERY);
+      display.print(groceries[i]);
+    }
+  }
+  while (display.nextPage());
 }
 
 void drawGroceryList() {
@@ -89,17 +111,17 @@ void drawGroceryList() {
   {
     display.fillScreen(GxEPD_WHITE);
 
-    display.setCursor(25, 15);
+    display.setCursor(GROCERY_X, 15);
     display.print("Grocery List");
     display.fillRect(0, 22, 240, 3, GxEPD_BLACK); // Bold line
-    display.drawLine(20, 0, 20, 416, GxEPD_BLACK); // Vertical line
+    display.drawLine(10, 0, 10, 416, GxEPD_BLACK); // Vertical line
 
     for (int i=0; i<16; i++) {
       display.drawLine(0, START_LINE+LINE_OFFSET*i, 240, START_LINE+LINE_OFFSET*i, GxEPD_BLACK);
     }
 
     display.setCursor(GROCERY_X, START_GROCERY);
-    display.print("Milk");
+    display.print("No groceries");
   }
   while (display.nextPage());
 }
