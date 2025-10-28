@@ -136,34 +136,21 @@ void setup() {
     delay(500);
   }
   Serial.print("IP: "); Serial.println(WiFi.localIP());
-
   server.on("/reminder", HTTP_POST, handleGroceries);
   server.begin();
   Serial.println("HTTP server ready");
+
 
   // E-Paper Display
   display.init(115200,true,50,false);
   display.setRotation(2);
   display.setFont(&FreeMonoBold9pt7b);
   display.setTextColor(GxEPD_BLACK);
-  
-  // HTTP Server
-  WiFi.begin(ssid, password);
-  Serial.print("Connecting to ");
-  Serial.println(ssid);
-  while (WiFi.status() != WL_CONNECTED) {
-    Serial.print(".");
-    delay(500);
-  }
-  Serial.print("IP: "); Serial.println(WiFi.localIP());
-
-  server.on("/reminder", HTTP_POST, handleGroceries);
-  server.begin();
-  Serial.println("HTTP server ready");
   display.setFullWindow();
 
   // Draw page outline
-  drawGroceryList();  
+  drawGroceryList();
+  Serial.print("Display ready");  
 }
 
 void loop() {
