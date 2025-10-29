@@ -15,6 +15,9 @@
 
 #include <GxEPD2_BW.h>
 #include <Fonts/FreeMonoBold9pt7b.h>
+#include <WiFi.h>
+#include <WebServer.h>
+#include "ssid_options.h"
 
 // ESP32 CS(SS)=5,SCL(SCK)=18,SDA(MOSI)=23,BUSY=4,RES(RST)=19,DC=15
 #define CS_PIN (5)
@@ -30,15 +33,10 @@ GxEPD2_BW<GxEPD2_370_GDEY037T03, GxEPD2_370_GDEY037T03::HEIGHT> display(GxEPD2_3
 #define START_GROCERY 45
 #define GROCERY_X 15
 
-/*
-* HTTP server Module
-*/
-#include <WiFi.h>
-#include <WebServer.h>
-#include "network.h"
-
+// /*
+// * HTTP server Module
+// */
 WebServer server(80);
-
 
 void handleGroceries() {
   // Receive POST data
