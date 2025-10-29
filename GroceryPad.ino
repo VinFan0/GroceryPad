@@ -53,6 +53,7 @@ void handleGroceries() {
   static const int MAX_GROCERIES = 50;
   static const char* groceries[MAX_GROCERIES];
   static char buffer[2048]; // adjust as needed
+  char resized_grocery[18];
 
   // Copy body into a writable buffer
   strncpy(buffer, body.c_str(), sizeof(buffer));
@@ -93,9 +94,30 @@ void handleGroceries() {
       display.setCursor(GROCERY_X, START_GROCERY);
       display.print("No groceries");
     }
-    for(int i=0; i<count; i++) {
-      display.setCursor(GROCERY_X, i*LINE_OFFSET + START_GROCERY);
-      display.print(groceries[i]);
+    if (count <= 15) {
+      for(int i=0; i<count; i++) {
+        display.setCursor(GROCERY_X, i*LINE_OFFSET + START_GROCERY);
+        if(strlen(groceries[i]) > 20) {
+           strncpy(resized_grocery, groceries[i], 17);
+           resized_grocery[17] = '\0';
+           display.print(resized_grocery);
+           display.print("...");
+        } else display.print(groceries[i]);
+      }
+    } else {
+      for(int i=0; i<14; i++) {
+        display.setCursor(GROCERY_X, i*LINE_OFFSET + START_GROCERY);
+        if(strlen(groceries[i]) > 20) {
+           strncpy(resized_grocery, groceries[i], 17);
+           resized_grocery[17] = '\0';
+           display.print(resized_grocery);
+           display.print("...");
+        } else display.print(groceries[i]);
+      }
+      display.setCursor(GROCERY_X, 14*LINE_OFFSET+START_GROCERY);
+      display.print("And ");
+      display.print(count-14);
+      display.print(" more");
     }
   }
   while (display.nextPage());
