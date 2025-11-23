@@ -2,8 +2,8 @@
 #define __NETWORK_H_
 // Network Selection
 
-// #define __HOME_NETWORK_
-#define __JOURNAL_NETWORK_
+#define __HOME_NETWORK_
+// #define __JOURNAL_NETWORK_
 // #define __USU_NETWORK_
 // #define __PHONE_HOTSPOT_
 #ifdef __HOME_NETWORK_

@@ -4,6 +4,8 @@
 *   Description: E-Paper display driver with HTTP server hosting 
 *   for grocery list collection. When a POST is recieved by the
 *   server, the data is parsed and writted to the E-Paper display.
+*
+*   Board: ESP32-C3 SuperMini
 */
 
 /*
@@ -19,14 +21,25 @@
 #include <WebServer.h>
 #include "ssid_options.h"
 
-// ESP32 CS(SS)=5,SCL(SCK)=18,SDA(MOSI)=23,BUSY=4,RES(RST)=19,DC=15
-#define CS_PIN (5)
-#define BUSY_PIN (4)
-#define RES_PIN (19)
-#define DC_PIN (15)
+/* ESP32-C3 SuperMini
+        CS(SS)=7
+        SCL(SCK)=4
+        SDA(MOSI)=6
+        BUSY=20
+        RES(RST)=1
+        DC=21
+*/
+#define CS_PIN (7)
+#define BUSY_PIN (20)
+#define RES_PIN (1)
+#define DC_PIN (21)
 
 // 3.7'' EPD Module
-GxEPD2_BW<GxEPD2_370_GDEY037T03, GxEPD2_370_GDEY037T03::HEIGHT> display(GxEPD2_370_GDEY037T03(/*CS=5*/ CS_PIN, /*DC=*/ DC_PIN, /*RES=*/ RES_PIN, /*BUSY=*/ BUSY_PIN)); // GDEY037T03 240x416, UC8253
+GxEPD2_BW<GxEPD2_370_GDEY037T03, GxEPD2_370_GDEY037T03::HEIGHT> display(GxEPD2_370_GDEY037T03(
+                                                                            /*CS=7*/ CS_PIN, 
+                                                                            /*DC=21*/ DC_PIN, 
+                                                                            /*RES=1*/ RES_PIN, 
+                                                                            /*BUSY=20*/ BUSY_PIN)); // GDEY037T03 240x416, UC8253
 
 #define START_LINE 25
 #define LINE_OFFSET 25
@@ -146,20 +159,22 @@ void drawGroceryList() {
 
 void setup() {
   Serial.begin(115200);
+  delay(500);
+  while(!Serial) {;}
 
   // HTTP Server
-  WiFi.begin(ssid, password);
   Serial.print("Connecting to ");
   Serial.println(ssid);
+  WiFi.begin(ssid, password);
   while (WiFi.status() != WL_CONNECTED) {
-    Serial.print(".");
     delay(500);
   }
+  Serial.println("WiFi Connected");
   Serial.print("IP: "); Serial.println(WiFi.localIP());
   server.on("/reminder", HTTP_POST, handleGroceries);
   server.begin();
   Serial.println("HTTP server ready");
-
+  delay(200);
 
   // E-Paper Display
   display.init(115200,true,50,false);
