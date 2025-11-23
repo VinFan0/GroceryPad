@@ -160,7 +160,9 @@ void drawGroceryList() {
 void setup() {
   Serial.begin(115200);
   delay(500);
-  while(!Serial) {;}
+  // while(!Serial) {;}
+
+  pinMode(LED_BUILTIN, OUTPUT);
 
   // HTTP Server
   Serial.print("Connecting to ");
@@ -169,6 +171,7 @@ void setup() {
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
   }
+  digitalWrite(LED_BUILTIN, HIGH);
   Serial.println("WiFi Connected");
   Serial.print("IP: "); Serial.println(WiFi.localIP());
   server.on("/reminder", HTTP_POST, handleGroceries);
@@ -191,6 +194,11 @@ void setup() {
 void loop() {
   // Server handling
   server.handleClient();
+
+  digitalWrite(LED_BUILTIN, HIGH);
+  delay(500);
+  digitalWrite(LED_BUILTIN, LOW);
+  delay(500);
 
   // Writing to the display happens in the POST handler to
   // reduce required screen refreshes
