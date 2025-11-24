@@ -1,0 +1,94 @@
+(footprint "HiLetgo TP4056 BOB"
+	(version 20241229)
+	(generator "pcbnew")
+	(generator_version "9.0")
+	(layer "F.Cu")
+	(descr "Solder pads to connect wires from BOB outputs")
+	(property "Reference" "REF**"
+		(at 0 -0.5 0)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(uuid "c48d0786-ad56-4123-942e-b93b8b63f529")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.1)
+			)
+		)
+	)
+	(property "Value" "HiLetgo TP4056 BOB"
+		(at 0 1 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(uuid "b12ead8d-97a6-40fc-b28c-d554fe8f5b37")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "5ab759f4-c35c-404f-b2ec-db0f9e081978")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "6dd09e3b-35da-4e16-83f2-dd2c0bf56edb")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr smd)
+	(fp_rect
+		(start -12.5 -8.25)
+		(end 12.5 8.25)
+		(stroke
+			(width 0.2)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.SilkS")
+		(uuid "db23cdd1-64bb-4a3c-b553-696c6d130350")
+	)
+	(fp_text user "${REFERENCE}"
+		(at 0 2.5 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(uuid "772538a2-495a-447d-975f-7cbda866fd12")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(pad "3" smd oval
+		(at -10.75 7)
+		(size 2.5 1.5)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "99376e48-aaa7-4c0d-9351-cbdb3ef3c0ea")
+	)
+	(pad "4" smd oval
+		(at -10.75 -7)
+		(size 2.5 1.5)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "d997f3dd-3e27-49ac-ae4e-52134cf9df90")
+	)
+	(embedded_fonts no)
+)

@@ -1,0 +1,6 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "ESP32-C3_SUPERMINI_TH")(type "KiCad")(uri "C:/Users/Ryan/Downloads/ESP32-C3_SUPERMINI_TH/ESP32-C3_SUPERMINI_TH.kicad_sym")(options "")(descr ""))
+  (lib (name "TP4056_BOB")(type "KiCad")(uri "${KIPRJMOD}/symbols/TP4056_BOB.kicad_sym")(options "")(descr ""))
+  (lib (name "e-ink_Display")(type "KiCad")(uri "${KIPRJMOD}/symbols/e-ink_Display.kicad_sym")(options "")(descr ""))
+)
