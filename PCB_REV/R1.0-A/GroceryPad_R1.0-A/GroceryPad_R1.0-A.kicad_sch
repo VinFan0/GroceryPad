@@ -1440,9 +1440,9 @@
 		)
 		(uuid "31537ca3-66c2-4834-bc41-af9079d6a120")
 	)
-	(text "Epaper Module"
+	(text "Epaper Module Connector"
 		(exclude_from_sim no)
-		(at 218.694 53.594 0)
+		(at 225.806 54.356 0)
 		(effects
 			(font
 				(size 1.27 1.27)
