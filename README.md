@@ -5,7 +5,7 @@ GroceryPad is a compact display for shopping lists, to-do lists, reminders, and 
 
 GroceryPad is initially designed to sync with a list managed in the Reminders app of an iOS device. In this configuration, the iOS device sends a scheduled HTTP POST with the contents of the reminder/list to the server hosted by the GroceryPad device. 
 
-**Recent Changes**
+**R1.0-A changes**
 - Custom designed PCB for compact form-factor
 - Models and OrcaSlicer project for 3d printed housing
 
