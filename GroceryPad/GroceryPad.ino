@@ -50,6 +50,8 @@ GxEPD2_BW<GxEPD2_370_GDEY037T03, GxEPD2_370_GDEY037T03::HEIGHT> display(GxEPD2_3
 // * HTTP server Module
 // */
 WebServer server(80);
+unsigned long lastReconnectAttempt = 0;
+const unsigned long RECONNECT_INTERVAL = 5000; // 5 seconds
 
 void handleGroceries() {
   // Receive POST data
@@ -157,6 +159,22 @@ void drawGroceryList() {
   while (display.nextPage());
 }
 
+void serverInit(){
+  digitalWrite(LED_BUILTIN, HIGH);
+  Serial.print("Connecting to ");
+  Serial.println(ssid);
+  WiFi.begin(ssid, password);
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+  }
+  Serial.println("WiFi Connected");
+  Serial.print("IP: "); Serial.println(WiFi.localIP());
+  server.on("/reminder", HTTP_POST, handleGroceries);
+  server.begin();
+  Serial.println("HTTP server ready");
+  delay(200);
+}
+
 void setup() {
   Serial.begin(115200);
   delay(500);
@@ -165,19 +183,7 @@ void setup() {
   pinMode(LED_BUILTIN, OUTPUT);
 
   // HTTP Server
-  Serial.print("Connecting to ");
-  Serial.println(ssid);
-  WiFi.begin(ssid, password);
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(500);
-  }
-  digitalWrite(LED_BUILTIN, HIGH);
-  Serial.println("WiFi Connected");
-  Serial.print("IP: "); Serial.println(WiFi.localIP());
-  server.on("/reminder", HTTP_POST, handleGroceries);
-  server.begin();
-  Serial.println("HTTP server ready");
-  delay(200);
+  serverInit();
 
   // E-Paper Display
   display.init(115200,true,50,false);
@@ -195,10 +201,19 @@ void loop() {
   // Server handling
   server.handleClient();
 
-  digitalWrite(LED_BUILTIN, HIGH);
-  delay(500);
-  digitalWrite(LED_BUILTIN, LOW);
-  delay(500);
+  if (WiFi.status() != WL_CONNECTED) {
+    unsigned long now = millis();
+    if (now - lastReconnectAttempt >= RECONNECT_INTERVAL) {
+      lastReconnectAttempt = now;
+      Serial.println("WiFi disconnected — attempting reconnect...");
+      serverInit();
+    }
+  } else {
+    digitalWrite(LED_BUILTIN, HIGH);
+    delay(500);
+    digitalWrite(LED_BUILTIN, LOW);
+    delay(500);
+  }
 
   // Writing to the display happens in the POST handler to
   // reduce required screen refreshes
