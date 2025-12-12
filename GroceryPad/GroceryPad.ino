@@ -161,12 +161,41 @@ void drawGroceryList() {
 
 void serverInit(){
   digitalWrite(LED_BUILTIN, HIGH);
-  Serial.print("Connecting to ");
-  Serial.println(ssid);
-  WiFi.begin(ssid, password);
+  Serial.println("Scanning...");
+
+  int n = WiFi.scanNetworks();
+
+  int bestIndex = -1;
+  int bestRSSI = -999;
+
+  for (int i = 0; i < n; i++) {
+    String found = WiFi.SSID(i);
+    int rssi = WiFi.RSSI(i);
+
+    for (int j = 0; j < knownNetworksCount; j++) {
+      if (found == knownNetworks[j].ssid && rssi > bestRSSI) {
+        bestRSSI = rssi;
+        bestIndex = j;
+      }
+    }
+  }
+
+  if (bestIndex < 0) {
+    Serial.println("No known SSIDs found.");
+    return;
+  }
+
+  Serial.print("Connecting to: ");
+  Serial.println(knownNetworks[bestIndex].ssid);
+
+  WiFi.begin(
+    knownNetworks[bestIndex].ssid,
+    knownNetworks[bestIndex].password
+  );
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
   }
+  
   Serial.println("WiFi Connected");
   Serial.print("IP: "); Serial.println(WiFi.localIP());
   server.on("/reminder", HTTP_POST, handleGroceries);
@@ -205,6 +234,7 @@ void loop() {
     unsigned long now = millis();
     if (now - lastReconnectAttempt >= RECONNECT_INTERVAL) {
       lastReconnectAttempt = now;
+      delay(500);
       Serial.println("WiFi disconnected — attempting reconnect...");
       serverInit();
     }
