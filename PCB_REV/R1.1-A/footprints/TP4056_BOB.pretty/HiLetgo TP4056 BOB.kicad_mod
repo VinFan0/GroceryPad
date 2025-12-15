@@ -1,0 +1,210 @@
+(footprint "HiLetgo TP4056 BOB"
+	(version 20241229)
+	(generator "pcbnew")
+	(generator_version "9.0")
+	(layer "F.Cu")
+	(descr "Solder pads to connect wires from BOB outputs")
+	(property "Reference" "REF**"
+		(at 2 -2.5 0)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(uuid "c48d0786-ad56-4123-942e-b93b8b63f529")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.1)
+			)
+		)
+	)
+	(property "Value" "HiLetgo TP4056 BOB"
+		(at 2 -1 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(uuid "b12ead8d-97a6-40fc-b28c-d554fe8f5b37")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "5ab759f4-c35c-404f-b2ec-db0f9e081978")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "6dd09e3b-35da-4e16-83f2-dd2c0bf56edb")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr smd)
+	(fp_line
+		(start -12 -8.75)
+		(end 16 -8.75)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "F.SilkS")
+		(uuid "045f5f43-a607-46b0-85ff-7a7540170bb6")
+	)
+	(fp_line
+		(start -12 -4.5)
+		(end -12 -8.75)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "1da8a76e-12bb-40c8-bcfa-af80c5bf3033")
+	)
+	(fp_line
+		(start -12 8.75)
+		(end -12 4.5)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "c3ed1cf8-3003-4fda-8c32-0ecc6fe4f4c2")
+	)
+	(fp_line
+		(start 14.2 -5)
+		(end 14.2 5)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "3f99f9c5-7ce1-4046-a83b-830ab6f3aa65")
+	)
+	(fp_line
+		(start 16 -8.75)
+		(end 16 -6.25)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "81f0b03c-776b-4e54-8d29-938a4f48d7ba")
+	)
+	(fp_line
+		(start 16 -6.25)
+		(end 15.45 -6.25)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "F.SilkS")
+		(uuid "0c8c47f7-6414-4cbb-8c69-34dd715badbc")
+	)
+	(fp_line
+		(start 16 6.25)
+		(end 15.45 6.25)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "F.SilkS")
+		(uuid "a1b4eae9-2546-46f8-aafe-661edd234567")
+	)
+	(fp_line
+		(start 16 6.25)
+		(end 16 8.75)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "c2e7b36e-8fdd-4aea-978c-58ade3d456a0")
+	)
+	(fp_line
+		(start 16 8.75)
+		(end -12 8.75)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "3396f0be-ebbd-43fe-89fe-00e9777250c3")
+	)
+	(fp_rect
+		(start -14 -4.5)
+		(end -7 4.5)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.SilkS")
+		(uuid "7ac0dfc8-2d04-42c0-b3dc-4b7b171669af")
+	)
+	(fp_arc
+		(start 14.2 -5)
+		(mid 14.566117 -5.883883)
+		(end 15.45 -6.25)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "F.SilkS")
+		(uuid "5d6b67dd-6b60-4356-9db9-002dab81b8f0")
+	)
+	(fp_arc
+		(start 15.45 6.25)
+		(mid 14.566117 5.883883)
+		(end 14.2 5)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(layer "F.SilkS")
+		(uuid "8eb3ca38-24b3-40da-98f2-c985dc2f8a91")
+	)
+	(fp_text user "${REFERENCE}"
+		(at 2 0.5 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(uuid "772538a2-495a-447d-975f-7cbda866fd12")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(pad "3" thru_hole rect
+		(at 12.75 -7 180)
+		(size 2.5 2.5)
+		(drill 1.5)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "99376e48-aaa7-4c0d-9351-cbdb3ef3c0ea")
+	)
+	(pad "4" thru_hole rect
+		(at 12.75 7 180)
+		(size 2.5 2.5)
+		(drill 1.5)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "d997f3dd-3e27-49ac-ae4e-52134cf9df90")
+	)
+	(embedded_fonts no)
+)

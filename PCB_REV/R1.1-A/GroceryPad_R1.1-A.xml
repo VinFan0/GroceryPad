@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export version="E">
+  <design>
+    <source>D:\gitclones\GroceryPad\PCB_REV\R1.1-A\GroceryPad_R1.1-A.kicad_sch</source>
+    <date>2025-12-13T23:08:35-0700</date>
+    <tool>Eeschema 9.0.6</tool>
+    <textvar name="DATE">11/26/25</textvar>
+    <textvar name="REV">R1.1-A</textvar>
+    <sheet number="1" name="/" tstamps="/">
+      <title_block>
+        <title>GroceryPad</title>
+        <company/>
+        <rev>R1.1-A</rev>
+        <date>11/26/25</date>
+        <source>GroceryPad_R1.1-A.kicad_sch</source>
+        <comment number="1" value="Ryan Beck"/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+  </design>
+  <components>
+    <comp ref="C1">
+      <value>~</value>
+      <footprint>My_Connectors:1.25mm_8P_WireToBoard</footprint>
+      <datasheet>kicad-embed://JUSHUO_C29041.pdf</datasheet>
+      <description>8 Pin Wire to Board Connector</description>
+      <fields>
+        <field name="MFR">JUSHUO</field>
+        <field name="MPN">    1.25T-8PWT</field>
+        <field name="SPR">JLCPCB</field>
+        <field name="SPN">C29041</field>
+        <field name="Footprint">My_Connectors:1.25mm_8P_WireToBoard</field>
+        <field name="Datasheet">kicad-embed://JUSHUO_C29041.pdf</field>
+        <field name="Description">8 Pin Wire to Board Connector</field>
+      </fields>
+      <libsource lib="e-ink_Display" part="e-ink_Display" description="WeAct Studio 3.7&quot; Epaper Module"/>
+      <property name="MFR" value="JUSHUO"/>
+      <property name="MPN" value="    1.25T-8PWT"/>
+      <property name="SPR" value="JLCPCB"/>
+      <property name="SPN" value="C29041"/>
+      <property name="Sheetname" value="Root"/>
+      <property name="Sheetfile" value="GroceryPad_R1.1-A.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>8c12b027-9a29-495c-9d51-1ff96ac6361e</tstamps>
+    </comp>
+    <comp ref="D1">
+      <value>LED</value>
+      <footprint>LED_THT:LED_D3.0mm_Horizontal_O6.35mm_Z2.0mm</footprint>
+      <datasheet>~</datasheet>
+      <description>Light emitting diode</description>
+      <fields>
+        <field name="MFR">Lumimax Optoelectronic Technology</field>
+        <field name="MPN">LEDDC-3BLU</field>
+        <field name="SPR">Digikey</field>
+        <field name="SPN">4491-LEDDC-3BLU-ND</field>
+        <field name="Footprint">LED_THT:LED_D3.0mm_Horizontal_O6.35mm_Z2.0mm</field>
+        <field name="Datasheet">~</field>
+        <field name="Description">Light emitting diode</field>
+      </fields>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <property name="MFR" value="Lumimax Optoelectronic Technology"/>
+      <property name="MPN" value="LEDDC-3BLU"/>
+      <property name="SPR" value="Digikey"/>
+      <property name="SPN" value="4491-LEDDC-3BLU-ND"/>
+      <property name="Sheetname" value="Root"/>
+      <property name="Sheetfile" value="GroceryPad_R1.1-A.kicad_sch"/>
+      <property name="ki_keywords" value="LED diode"/>
+      <property name="ki_fp_filters" value="LED* LED_SMD:* LED_THT:*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>54edac07-a33f-4d55-a520-2a22b7eb383e</tstamps>
+    </comp>
+    <comp ref="R1">
+      <value>2k</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
+      <datasheet>kicad-embed://JLC_C1359.pdf</datasheet>
+      <description>Resistor, US symbol</description>
+      <fields>
+        <field name="MPN">0805W8J0202T5E</field>
+        <field name="MFR">UNI-ROYAL(Uniroyal Elec)</field>
+        <field name="SPR">JLCPCB</field>
+        <field name="SPN">C1359</field>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
+        <field name="Datasheet">kicad-embed://JLC_C1359.pdf</field>
+        <field name="Description">Resistor, US symbol</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="MPN" value="0805W8J0202T5E"/>
+      <property name="MFR" value="UNI-ROYAL(Uniroyal Elec)"/>
+      <property name="SPR" value="JLCPCB"/>
+      <property name="SPN" value="C1359"/>
+      <property name="Sheetname" value="Root"/>
+      <property name="Sheetfile" value="GroceryPad_R1.1-A.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>381d0154-ea59-4206-95d8-b2c84ca0595a</tstamps>
+    </comp>
+  </components>
+  <libparts>
+    <libpart lib="Device" part="Battery">
+      <description>Multiple-cell battery</description>
+      <docs>~</docs>
+      <fields>
+        <field name="Reference">BT</field>
+        <field name="Value">Battery</field>
+        <field name="Footprint"/>
+        <field name="Datasheet">~</field>
+        <field name="Description">Multiple-cell battery</field>
+      </fields>
+      <pins>
+        <pin num="1" name="+" type="passive"/>
+        <pin num="2" name="-" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="LED">
+      <description>Light emitting diode</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>LED*</fp>
+        <fp>LED_SMD:*</fp>
+        <fp>LED_THT:*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">D</field>
+        <field name="Value">LED</field>
+        <field name="Footprint"/>
+        <field name="Datasheet">~</field>
+        <field name="Description">Light emitting diode</field>
+        <field name="Sim.Pins">1=K 2=A</field>
+      </fields>
+      <pins>
+        <pin num="1" name="K" type="passive"/>
+        <pin num="2" name="A" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="R_US">
+      <description>Resistor, US symbol</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>R_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">R</field>
+        <field name="Value">R_US</field>
+        <field name="Footprint"/>
+        <field name="Datasheet">~</field>
+        <field name="Description">Resistor, US symbol</field>
+      </fields>
+      <pins>
+        <pin num="1" name="" type="passive"/>
+        <pin num="2" name="" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="ESP32-C3_SUPERMINI_TH" part="ESP32-C3_SUPERMINI_TH">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">ESP32-C3_SUPERMINI_TH</field>
+        <field name="Footprint">ESP32-C3_SUPERMINI_TH:MODULE_ESP32-C3_SUPERMINI_TH</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+        <field name="MF">Espressif Systems</field>
+        <field name="Description_1">Super tiny ESP32-C3 board</field>
+        <field name="CREATOR">DIZAR</field>
+        <field name="Price">None</field>
+        <field name="Package">Package</field>
+        <field name="Check_prices">https://www.snapeda.com/parts/ESP32-C3%20SuperMini_TH/Espressif+Systems/view-part/?ref=eda</field>
+        <field name="STANDARD">IPC-7351B</field>
+        <field name="VERIFIER"/>
+        <field name="SnapEDA_Link">https://www.snapeda.com/parts/ESP32-C3%20SuperMini_TH/Espressif+Systems/view-part/?ref=snap</field>
+        <field name="MP">ESP32-C3 SuperMini_TH</field>
+        <field name="Availability">Not in stock</field>
+        <field name="MANUFACTURER">Espressif Systems</field>
+      </fields>
+      <pins>
+        <pin num="0" name="GPIO0" type="bidirectional"/>
+        <pin num="1" name="GPIO1" type="bidirectional"/>
+        <pin num="2" name="GPIO2" type="bidirectional"/>
+        <pin num="3" name="GPIO3" type="bidirectional"/>
+        <pin num="3.3" name="3V3" type="power_out"/>
+        <pin num="4" name="GPIO4" type="bidirectional"/>
+        <pin num="5" name="GPIO5" type="bidirectional"/>
+        <pin num="5V" name="5V" type="power_in"/>
+        <pin num="6" name="GPIO6" type="bidirectional"/>
+        <pin num="7" name="GPIO7" type="bidirectional"/>
+        <pin num="8" name="GPIO8" type="bidirectional"/>
+        <pin num="9" name="GPIO9" type="bidirectional"/>
+        <pin num="10" name="GPIO10" type="bidirectional"/>
+        <pin num="20" name="GPIO20" type="bidirectional"/>
+        <pin num="21" name="GPIO21" type="bidirectional"/>
+        <pin num="G" name="GND" type="power_in"/>
+      </pins>
+    </libpart>
+    <libpart lib="My_Switch" part="SW_SPST">
+      <description>Single Pole Single Throw (SPST) switch</description>
+      <docs>~</docs>
+      <fields>
+        <field name="Reference">SW1</field>
+        <field name="Value">SW_SPST</field>
+        <field name="Footprint">Switch:SPDT Switch</field>
+        <field name="Datasheet">~</field>
+        <field name="Description">Single Pole Single Throw (SPST) switch</field>
+      </fields>
+      <pins>
+        <pin num="1" name="A" type="passive"/>
+        <pin num="2" name="B" type="power_out"/>
+      </pins>
+    </libpart>
+    <libpart lib="TP4056_BOB" part="TP4056_BOB">
+      <fields>
+        <field name="Reference">B</field>
+        <field name="Value"/>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <pins>
+        <pin num="1" name="B+" type="passive"/>
+        <pin num="2" name="B-" type="passive"/>
+        <pin num="3" name="OUT+" type="power_out"/>
+        <pin num="4" name="OUT-" type="power_out"/>
+      </pins>
+    </libpart>
+    <libpart lib="e-ink_Display" part="e-ink_Display">
+      <description>WeAct Studio 3.7" Epaper Module</description>
+      <fields>
+        <field name="Reference">D</field>
+        <field name="Value"/>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">WeAct Studio 3.7" Epaper Module</field>
+      </fields>
+      <pins>
+        <pin num="1" name="BUSY" type="output"/>
+        <pin num="2" name="RES" type="input"/>
+        <pin num="3" name="DC" type="input"/>
+        <pin num="4" name="CS" type="input"/>
+        <pin num="5" name="SCL" type="input"/>
+        <pin num="6" name="SDA" type="input"/>
+        <pin num="7" name="GND" type="passive"/>
+        <pin num="8" name="VCC" type="passive"/>
+      </pins>
+    </libpart>
+  </libparts>
+  <libraries>
+    <library logical="Device">
+      <uri>C:\Program Files\KiCad\9.0\share\kicad\symbols\/Device.kicad_sym</uri>
+    </library>
+    <library logical="ESP32-C3_SUPERMINI_TH">
+      <uri>C:/Users/Ryan/Downloads/ESP32-C3_SUPERMINI_TH/ESP32-C3_SUPERMINI_TH.kicad_sym</uri>
+    </library>
+    <library logical="My_Switch">
+      <uri>D:\gitclones\GroceryPad\PCB_REV\R1.1-A/symbols/My_Switch.kicad_sym</uri>
+    </library>
+    <library logical="TP4056_BOB">
+      <uri>D:\gitclones\GroceryPad\PCB_REV\R1.1-A/symbols/TP4056_BOB.kicad_sym</uri>
+    </library>
+    <library logical="e-ink_Display">
+      <uri>D:\gitclones\GroceryPad\PCB_REV\R1.1-A/symbols/e-ink_Display.kicad_sym</uri>
+    </library>
+  </libraries>
+  <nets>
+    <net code="1" name="3V3" class="3v3,Default">
+      <node ref="C1" pin="8" pinfunction="VCC" pintype="passive"/>
+    </net>
+    <net code="3" name="BUSY" class="Default">
+      <node ref="C1" pin="1" pinfunction="BUSY" pintype="output"/>
+    </net>
+    <net code="4" name="CS" class="Default">
+      <node ref="C1" pin="4" pinfunction="CS" pintype="input"/>
+    </net>
+    <net code="5" name="DC" class="Default">
+      <node ref="C1" pin="3" pinfunction="DC" pintype="input"/>
+    </net>
+    <net code="6" name="GND" class="GND,Default">
+      <node ref="C1" pin="7" pinfunction="GND" pintype="passive"/>
+      <node ref="R1" pin="2" pintype="passive"/>
+    </net>
+    <net code="7" name="Net-(D1-K)" class="Default">
+      <node ref="D1" pin="1" pinfunction="K" pintype="passive"/>
+      <node ref="R1" pin="1" pintype="passive"/>
+    </net>
+    <net code="8" name="RES" class="Default">
+      <node ref="C1" pin="2" pinfunction="RES" pintype="input"/>
+    </net>
+    <net code="9" name="SCL" class="Default">
+      <node ref="C1" pin="5" pinfunction="SCL" pintype="input"/>
+    </net>
+    <net code="10" name="SDA" class="Default">
+      <node ref="C1" pin="6" pinfunction="SDA" pintype="input"/>
+    </net>
+    <net code="11" name="STATUS" class="Default">
+      <node ref="D1" pin="2" pinfunction="A" pintype="passive"/>
+    </net>
+  </nets>
+</export>

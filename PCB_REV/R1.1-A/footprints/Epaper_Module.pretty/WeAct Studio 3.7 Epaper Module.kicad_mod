@@ -1,0 +1,140 @@
+(footprint "WeAct Studio 3.7 Epaper Module"
+	(version 20241229)
+	(generator "pcbnew")
+	(generator_version "9.0")
+	(layer "F.Cu")
+	(descr "Solder pads for connecting wires")
+	(property "Reference" "REF**"
+		(at 0 -0.5 0)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(uuid "2a890c3f-4b4b-4f0d-bb47-951cad568de0")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.1)
+			)
+		)
+	)
+	(property "Value" "WeAct Studio 3.7\" Epaper Module"
+		(at 0 1 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(uuid "e0524181-859b-4e62-866b-40aea9ce78cc")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "54c95303-7b1b-4e9a-afb9-b2ea21bd6620")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "0a0daede-9cd7-4c5e-a1fc-ea276950c8e0")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(fp_rect
+		(start -2 -12)
+		(end 2 12)
+		(stroke
+			(width 0.2)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.SilkS")
+		(uuid "d3de2412-090c-49f7-8566-306b7766fb95")
+	)
+	(fp_rect
+		(start -2.5 -12.5)
+		(end 2.5 12.5)
+		(stroke
+			(width 0.05)
+			(type default)
+		)
+		(fill no)
+		(layer "F.CrtYd")
+		(uuid "ea6e16d9-4bfb-420c-9811-8c766c837d66")
+	)
+	(fp_text user "${REFERENCE}"
+		(at 0 2.5 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(uuid "28d8f135-d7f6-4b6e-8cdb-33ae63fc87c1")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(pad "1" smd oval
+		(at 0 10.5)
+		(size 2.5 1.5)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "28c3d572-f95a-4206-be0e-83402d63f051")
+	)
+	(pad "2" smd oval
+		(at 0 7.5)
+		(size 2.5 1.5)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "e2e1f43d-6a05-405d-8503-64c2e46dc8b1")
+	)
+	(pad "3" smd oval
+		(at 0 4.5)
+		(size 2.5 1.5)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "218eadca-1d19-4c9c-96d5-9a39283acffd")
+	)
+	(pad "4" smd oval
+		(at 0 1.5)
+		(size 2.5 1.5)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "c2f692cc-14be-4e62-808f-5bb86a1b0bb0")
+	)
+	(pad "5" smd oval
+		(at 0 -1.5)
+		(size 2.5 1.5)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "e8ae0ebf-c4b3-4fa5-a845-b5623f073fcf")
+	)
+	(pad "6" smd oval
+		(at 0 -4.5)
+		(size 2.5 1.5)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "0638403d-6eb9-47c2-bac3-d24c16fadbbc")
+	)
+	(pad "7" smd oval
+		(at 0 -7.5)
+		(size 2.5 1.5)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "328e82f9-5a35-4276-ae34-1278c431bfc8")
+	)
+	(pad "8" smd oval
+		(at 0 -10.5)
+		(size 2.5 1.5)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "21bf9a53-d5db-4054-83f7-2692170aec68")
+	)
+	(embedded_fonts no)
+)

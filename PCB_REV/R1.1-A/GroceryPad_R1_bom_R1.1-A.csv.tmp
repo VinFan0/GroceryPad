@@ -1,0 +1,20 @@
+Component,Description,Part,References,Value,Footprint,Quantity Per PCB,Datasheet,MFR,MPN,SPR,SPN,Field8
+1,8 Pin Wire to Board Connector,e-ink_Display,C1,~,1.25mm_8P_WireToBoard,1,kicad-embed://JUSHUO_C29041.pdf,JUSHUO,1.25T-8PWT,JLCPCB,C29041,
+2,Light emitting diode,LED,D1,LED,LED_D3.0mm_Horizontal_O6.35mm_Z2.0mm,1,~,Lumimax Optoelectronic Technology,LEDDC-3BLU,Digikey,,4491-LEDDC-3BLU-ND
+3,"Resistor, US symbol",R_US,R1,2k,R_0805_2012Metric,1,kicad-embed://JLC_C1359.pdf,UNI-ROYAL(Uniroyal Elec),0805W8J0202T5E,JLCPCB,C1359,
+
+
+
+
+
+Component Groups:,3
+Component Count:,3
+Fitted Components:,3
+Number of PCBs:,1
+Total components:,3
+Schematic Version:,R1.1-A
+Schematic Date:,11/26/25
+PCB Variant:,default
+BoM Date:,2025-12-13T22:59:55-0700
+Schematic Source:,GroceryPad_R1.1-A.kicad_sch
+KiCad Version:,Eeschema 9.0.6
