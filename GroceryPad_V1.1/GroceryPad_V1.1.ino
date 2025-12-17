@@ -5,8 +5,8 @@
 *   Board: ESP32-C3 SuperMini
 */
 
-#include "BLE.cpp"
-#include "EPaper.cpp"
+#include "epaper.h"
+#include "ble_device.h"
 
 void setup() {
   Serial.begin(115200);
@@ -14,28 +14,26 @@ void setup() {
 
   pinMode(LED_BUILTIN, OUTPUT);
 
-  
+  epaperInit();
+  bleInit();
 }
 
 void loop() {
-  // Server handling
-  server.handleClient();
+  if (bleConnected) {
+    // BLE Connected
+    digitalWrite(LED_PIN, HIGH); // Solid ON
 
-  if (WiFi.status() != WL_CONNECTED) {
-    unsigned long now = millis();
-    if (now - lastReconnectAttempt >= RECONNECT_INTERVAL) {
-      lastReconnectAttempt = now;
-      delay(500);
-      Serial.println("WiFi disconnected — attempting reconnect...");
-      serverInit();
+    if (updatePending && readyToUpdate) {
+      Serial.println("Received display update");
+      updatePending = false;
+      readyToUpdate = false;
+      //drawList(syncedList);
     }
   } else {
-    digitalWrite(LED_BUILTIN, HIGH);
-    delay(500);
-    digitalWrite(LED_BUILTIN, LOW);
-    delay(500);
+    // BLE Advertising
+    digitalWrite(LED_PIN, LOW); // Short OFF
+    delay(300);
+    digitalWrite(LED_PIN, HIGH); // Long ON
+    delay(900);
   }
-
-  // Writing to the display happens in the POST handler to
-  // reduce required screen refreshes
 }

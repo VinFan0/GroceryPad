@@ -1,3 +1,5 @@
+#ifndef __EPAPER_H_
+#define __EPAPER_H_
 /*
 * EPaper.cpp
 * Written by Ryan Beck
@@ -32,31 +34,66 @@ GxEPD2_BW<GxEPD2_370_GDEY037T03, GxEPD2_370_GDEY037T03::HEIGHT> display(GxEPD2_3
 
 #define START_LINE 25
 #define LINE_OFFSET 25
-#define START_GROCERY 45
-#define GROCERY_X 15
+#define START_ITEM 45
+#define ITEM_X 15
 
-void drawGroceryList() {
+struct t_listItem{
+  String itemName;
+  bool checked;
+};
+
+struct t_displayList{
+  String listName = "";
+  int itemCount = 0;
+  std::vector<t_listItem> listItems;
+};
+
+t_displayList *syncedList = new t_displayList();
+
+void drawList(t_displayList *list) {
   display.firstPage();
   do
   {
     display.fillScreen(GxEPD_WHITE);
 
-    display.setCursor(GROCERY_X, 15);
-    display.print("Grocery List");
+    // Page Headers Lines
     display.fillRect(0, 22, 240, 3, GxEPD_BLACK); // Bold line
     display.drawLine(10, 0, 10, 416, GxEPD_BLACK); // Vertical line
-
+    
+    // Page Lines
     for (int i=0; i<16; i++) {
       display.drawLine(0, START_LINE+LINE_OFFSET*i, 240, START_LINE+LINE_OFFSET*i, GxEPD_BLACK);
     }
 
-    display.setCursor(GROCERY_X, START_GROCERY);
-    display.print("No groceries");
+    // List Name
+    display.setCursor(ITEM_X, 15);
+    if (list->listName != "") {
+      display.print(list->listName);
+    } else {
+      display.print("No List");
+    }
+
+    // List Items
+    display.setCursor(ITEM_X, START_ITEM);
+    if (list->itemCount != 0) {
+      for (int i=0; i<15; i++) {
+        display.setCursor(ITEM_X, START_ITEM + i*LINE_OFFSET);
+        display.print(list->listItems[i].itemName);
+      }
+    } else {
+      display.print("No items");
+    }
   }
   while (display.nextPage());
 }
 
-epaperInit() {
+void clearSyncedList(t_displayList *list) {
+  list->listName = "";
+  list->itemCount = 0;
+  list->listItems.clear();
+}
+
+void epaperInit() {
   // E-Paper Display
   display.init(115200,true,50,false);
   display.setRotation(2);
@@ -65,6 +102,7 @@ epaperInit() {
   display.setFullWindow();
 
   // Draw page outline
-  drawGroceryList();
-  Serial.print("Display ready");  
+  drawList(syncedList);
+  Serial.println("Display ready");  
 }
+#endif //__EPAPER_H_
