@@ -29,6 +29,8 @@ class MyServerCallbacks : public BLEServerCallbacks {
     Serial.println("BLE CONNECTED");
     //digitalWrite(LED_PIN, LOW);   // LED ON (active low)
     bleConnected = true;
+    updatePending = false;
+    readyToUpdate = false;
   }
 
   void onDisconnect(BLEServer* pServer) {
@@ -37,6 +39,7 @@ class MyServerCallbacks : public BLEServerCallbacks {
     bleConnected = false;
     clearSyncedList(syncedList);
     updatePending = true;
+    readyToUpdate = true;
 
     delay(100);  // Required for stability
     pServer->getAdvertising()->start();
@@ -52,8 +55,11 @@ class MyServerCallbacks : public BLEServerCallbacks {
 class Value1Callbacks : public BLECharacteristicCallbacks {
   void onWrite(BLECharacteristic *pCharacteristic) {
     String value = pCharacteristic->getValue();
-    Serial.print("List Name: ");
-    Serial.print(value);
+    value.trim();
+    // Serial.print("List Name: ");
+    // Serial.print(value);
+
+    syncedList->listName = value;
   }
 };
 
@@ -78,8 +84,11 @@ class Value2Callbacks : public BLECharacteristicCallbacks {
 
     Serial.print("Item count: ");
     Serial.println(itemCount);
-    
+
+    syncedList->itemCount = itemCount;
+
     updatePending = true;
+    
   }
 };
 
@@ -106,14 +115,14 @@ class Value3Callbacks : public BLECharacteristicCallbacks {
 
     command.toLowerCase();
 
-    Serial.print("Command: ");
-    Serial.println(command);
+    // Serial.print("Command: ");
+    // Serial.println(command);
 
-    Serial.print("Item: ");
-    Serial.println(itemName);
+    // Serial.print("Item: ");
+    // Serial.println(itemName);
 
-    Serial.print("Item to add: ");
-    Serial.println(value);
+    // Serial.print("Item to add: ");
+    // Serial.println(value);
 
     // ───── Command handling example ─────
     if (command == "add") {
@@ -127,11 +136,25 @@ class Value3Callbacks : public BLECharacteristicCallbacks {
         syncedList->itemCount = syncedList->itemCount+1;
       }
     } else if (command == "delete") {
+      if (syncedList->itemCount > 0) {
+        if(itemName.length() != 0) {
+          for (int i=0; i<syncedList->itemCount; i++) {
+            if (syncedList->listItems[i].itemName == itemName) {
+              syncedList->listItems.erase(syncedList->listItems.begin() + i);
+
+              syncedList->itemCount = syncedList->itemCount - 1;
+              break;
+            }
+          }
+        }
+      }
     } else if (command == "check") {
     } else if (command == "uncheck") {
     } else {
       Serial.println("Unknown command");
     }
+    
+    updatePending = true;
   }
 };
 
@@ -141,7 +164,7 @@ class Value3Callbacks : public BLECharacteristicCallbacks {
 /* ────────────────────────────────────────────── */
 class Value4Callbacks : public BLECharacteristicCallbacks {
   void onWrite(BLECharacteristic *pCharacteristic) {
-    Serial.print("List Synced: ");
+    Serial.println("List Synced");
     readyToUpdate = true;
   }
 };

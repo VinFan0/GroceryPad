@@ -76,7 +76,13 @@ void drawList(t_displayList *list) {
     // List Items
     display.setCursor(ITEM_X, START_ITEM);
     if (list->itemCount != 0) {
-      for (int i=0; i<15; i++) {
+      int displayCount = 0;
+      if (list->itemCount > 15) {
+        displayCount = 15;
+      } else {
+        displayCount = list->itemCount;
+      }
+      for (int i=0; i<displayCount; i++) {
         display.setCursor(ITEM_X, START_ITEM + i*LINE_OFFSET);
         display.print(list->listItems[i].itemName);
       }

@@ -8,6 +8,26 @@
 #include "epaper.h"
 #include "ble_device.h"
 
+void printList(t_displayList* list) {
+  if (list->listName != "") {
+    Serial.print(list->listName);
+    Serial.print(" (");
+    Serial.print(list->itemCount);
+    Serial.println(")");
+    Serial.println("*****************");
+    for(int i=0; i<list->itemCount; i++) {
+      if (list->listItems[i].checked) {
+        Serial.print("X ");
+      } else {
+        Serial.print("  ");
+      }
+      Serial.println(list->listItems[i].itemName);
+    }
+  } else {
+    Serial.println("Blank list");
+  }
+}
+
 void setup() {
   Serial.begin(115200);
   delay(500);
@@ -27,7 +47,8 @@ void loop() {
       Serial.println("Received display update");
       updatePending = false;
       readyToUpdate = false;
-      //drawList(syncedList);
+      printList(syncedList);
+      drawList(syncedList);
     }
   } else {
     // BLE Advertising
