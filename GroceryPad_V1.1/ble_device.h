@@ -20,6 +20,7 @@
 bool bleConnected = false;
 bool updatePending = false;
 bool readyToUpdate = false;
+bool clearedOnDisconnect = true;
 
 /* ────────────────────────────────────────────── */
 /* Server connection callbacks                   */
@@ -37,9 +38,9 @@ class MyServerCallbacks : public BLEServerCallbacks {
     Serial.println("BLE DISCONNECTED");
     //digitalWrite(LED_PIN, HIGH);  // LED OFF
     bleConnected = false;
-    clearSyncedList(syncedList);
     updatePending = true;
     readyToUpdate = true;
+    clearedOnDisconnect = false;
 
     delay(100);  // Required for stability
     pServer->getAdvertising()->start();
@@ -56,8 +57,8 @@ class Value1Callbacks : public BLECharacteristicCallbacks {
   void onWrite(BLECharacteristic *pCharacteristic) {
     String value = pCharacteristic->getValue();
     value.trim();
-    // Serial.print("List Name: ");
-    // Serial.print(value);
+    Serial.print("Received List Name: ");
+    Serial.println(value);
 
     syncedList->listName = value;
   }
@@ -69,26 +70,14 @@ class Value1Callbacks : public BLECharacteristicCallbacks {
 /* ────────────────────────────────────────────── */
 class Value2Callbacks : public BLECharacteristicCallbacks {
   void onWrite(BLECharacteristic *pCharacteristic) {
+    delay(20);
 
-    uint8_t* data = pCharacteristic->getData();
-    size_t len = pCharacteristic->getLength();
+    Serial.println("New list sync signal received");
 
-    if (len != sizeof(uint32_t)) {
-      Serial.print("Item count write error, length = ");
-      Serial.println(len);
-      return;
-    }
+    // ───── Clear your list here ─────
+    clearSyncedList(syncedList);
 
-    uint32_t itemCount;
-    memcpy(&itemCount, data, sizeof(uint32_t));
-
-    Serial.print("Item count: ");
-    Serial.println(itemCount);
-
-    syncedList->itemCount = itemCount;
-
-    updatePending = true;
-    
+    Serial.println("ACK sent to application through BLE management");
   }
 };
 
@@ -115,14 +104,11 @@ class Value3Callbacks : public BLECharacteristicCallbacks {
 
     command.toLowerCase();
 
-    // Serial.print("Command: ");
-    // Serial.println(command);
+    Serial.print("Command: ");
+    Serial.println(command);
 
-    // Serial.print("Item: ");
-    // Serial.println(itemName);
-
-    // Serial.print("Item to add: ");
-    // Serial.println(value);
+    Serial.print("Item: ");
+    Serial.println(itemName);
 
     // ───── Command handling example ─────
     if (command == "add") {
@@ -192,17 +178,17 @@ void bleInit() {
   value1Char->setValue("No List");	// Initial List Name -> No List
 
   // ───── Characteristic 2 ─────
-  // ──────── Item Count ────────
+  // ───────── New List ─────────
   BLECharacteristic *value2Char =
-    pService->createCharacteristic(
-      CHAR_VALUE2_UUID,
-      BLECharacteristic::PROPERTY_READ |
-      BLECharacteristic::PROPERTY_WRITE
-    );
+  pService->createCharacteristic(
+    CHAR_VALUE2_UUID,
+    BLECharacteristic::PROPERTY_READ |
+    BLECharacteristic::PROPERTY_WRITE |
+    BLECharacteristic::PROPERTY_NOTIFY
+  );
 
-  value2Char->setCallbacks(new Value2Callbacks()); // Initiate Item Count callback
-  uint32_t initialCount = 0;
-  value2Char->setValue((uint8_t*)&initialCount, sizeof(initialCount));	// Initial Item Count -> 0
+  value2Char->setCallbacks(new Value2Callbacks());	// Initiate Item Name callback
+  value2Char->setValue("");	// Initial Item Name -> No Item
 
   // ───── Characteristic 3 ─────
   // ─────── Item Details ───────

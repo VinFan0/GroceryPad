@@ -56,5 +56,14 @@ void loop() {
     delay(300);
     digitalWrite(LED_PIN, HIGH); // Long ON
     delay(900);
+
+    if (!clearedOnDisconnect) {
+      clearSyncedList(syncedList);
+      updatePending = false;
+      readyToUpdate = false;
+      clearedOnDisconnect = true;
+      printList(syncedList);
+      drawList(syncedList);
+    }
   }
 }
