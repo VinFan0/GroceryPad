@@ -35,7 +35,7 @@ GxEPD2_BW<GxEPD2_370_GDEY037T03, GxEPD2_370_GDEY037T03::HEIGHT> display(GxEPD2_3
 #define START_LINE 25
 #define LINE_OFFSET 25
 #define START_ITEM 45
-#define ITEM_X 15
+#define ITEM_X 18
 
 struct t_listItem{
   String itemName;
@@ -85,6 +85,9 @@ void drawList(t_displayList *list) {
       for (int i=0; i<displayCount; i++) {
         display.setCursor(ITEM_X, START_ITEM + i*LINE_OFFSET);
         display.print(list->listItems[i].itemName);
+        if(list->listItems[i].checked) {
+          display.fillRect(12, 40 + i*LINE_OFFSET , 15*list->listItems[i].itemName.length(), 2, GxEPD_BLACK);
+        }
       }
     } else {
       display.print("No items");

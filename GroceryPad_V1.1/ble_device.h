@@ -135,7 +135,17 @@ class Value3Callbacks : public BLECharacteristicCallbacks {
         }
       }
     } else if (command == "check") {
+      for (int i=0; i<syncedList->itemCount; i++) {
+        if (syncedList->listItems[i].itemName == itemName) {
+          syncedList->listItems[i].checked = true;
+        }
+      }
     } else if (command == "uncheck") {
+      for (int i=0; i<syncedList->itemCount; i++) {
+        if (syncedList->listItems[i].itemName == itemName) {
+          syncedList->listItems[i].checked = false;
+        }
+      }
     } else {
       Serial.println("Unknown command");
     }
