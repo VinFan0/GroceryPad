@@ -3,6 +3,7 @@
 *   Author: Ryan Beck
 *
 *   Board: ESP32-C3 SuperMini
+*   Version: 1.2
 */
 
 #include "epaper.h"
@@ -48,7 +49,7 @@ void loop() {
       updatePending = false;
       readyToUpdate = false;
       printList(syncedList);
-      drawList(syncedList);
+      drawListItems(syncedList);
     }
   } else {
     // BLE Advertising
@@ -63,7 +64,8 @@ void loop() {
       readyToUpdate = false;
       clearedOnDisconnect = true;
       printList(syncedList);
-      drawList(syncedList);
+      drawEmptyList();
+      drawListItems(syncedList);
     }
   }
 }

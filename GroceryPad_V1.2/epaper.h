@@ -32,10 +32,16 @@ GxEPD2_BW<GxEPD2_370_GDEY037T03, GxEPD2_370_GDEY037T03::HEIGHT> display(GxEPD2_3
                                                                             /*RES=1*/ RES_PIN, 
                                                                             /*BUSY=20*/ BUSY_PIN)); // GDEY037T03 240x416, UC8253
 
-#define START_LINE 25
-#define LINE_OFFSET 25
-#define START_ITEM 45
-#define ITEM_X 18
+#define START_LINE 25       // First page line
+#define LINE_OFFSET 25      // Page line spacing
+#define START_ITEM 45       // First item Y cursor
+#define ITEM_X 18           // Item X cursor
+
+#define TITLE_Y 15          // Title Y cursor
+
+#define BLOCK_X 16          // Partial block X position
+#define DISPLAY_WIDTH 240   // Partial block width (end of display)
+#define BLOCK_H 23          // Partial block height
 
 struct t_listItem{
   String itemName;
@@ -50,50 +56,79 @@ struct t_displayList{
 
 t_displayList *syncedList = new t_displayList();
 
-void drawList(t_displayList *list) {
+void drawEmptyList() {
   display.firstPage();
   do
   {
+    // Clear full screen
     display.fillScreen(GxEPD_WHITE);
 
-    // Page Headers Lines
+    // Draw Page Header Lines
     display.fillRect(0, 22, 240, 3, GxEPD_BLACK); // Bold line
     display.drawLine(10, 0, 10, 416, GxEPD_BLACK); // Vertical line
     
-    // Page Lines
+    // Draw Page Lines
     for (int i=0; i<16; i++) {
       display.drawLine(0, START_LINE+LINE_OFFSET*i, 240, START_LINE+LINE_OFFSET*i, GxEPD_BLACK);
     }
+  }
+  while (display.nextPage());
+}
 
-    // List Name
-    display.setCursor(ITEM_X, 15);
+void drawListItems(t_displayList *list) {
+
+  display.setPartialWindow(BLOCK_X, 0, DISPLAY_WIDTH, 20);  // Title block window
+
+  // List Name
+  display.firstPage();
+  do
+  {
+    display.fillRect(BLOCK_X, 0, DISPLAY_WIDTH, 20, GxEPD_WHITE);
+
+    display.setCursor(BLOCK_X, TITLE_Y);
     if (list->listName != "") {
       display.print(list->listName);
     } else {
       display.print("No List");
     }
+  } 
+  while (display.nextPage());
+  
+  // List Items
+  if (list->itemCount != 0) {
+    int displayCount = 0;
+    if (list->itemCount > 15) {
+      displayCount = 15;
+    } else {
+      displayCount = list->itemCount;
+    }
+    
+    for (int i=0; i<displayCount; i++) {
+      display.setPartialWindow(BLOCK_X, START_LINE + 2 + i*LINE_OFFSET, DISPLAY_WIDTH, BLOCK_H);
 
-    // List Items
-    display.setCursor(ITEM_X, START_ITEM);
-    if (list->itemCount != 0) {
-      int displayCount = 0;
-      if (list->itemCount > 15) {
-        displayCount = 15;
-      } else {
-        displayCount = list->itemCount;
-      }
-      for (int i=0; i<displayCount; i++) {
-        display.setCursor(ITEM_X, START_ITEM + i*LINE_OFFSET);
+      display.firstPage();
+      do
+      {
+        display.fillRect(BLOCK_X, START_LINE + 1 + i*LINE_OFFSET, DISPLAY_WIDTH, BLOCK_H, GxEPD_WHITE);
+
+        // display.setCursor(ITEM_X, START_ITEM + i*LINE_OFFSET);
+        display.setCursor(BLOCK_X, START_LINE + 18 + i*LINE_OFFSET);
         display.print(list->listItems[i].itemName);
         if(list->listItems[i].checked) {
-          display.fillRect(12, 40 + i*LINE_OFFSET , 15*list->listItems[i].itemName.length(), 2, GxEPD_BLACK);
+          display.fillRect(BLOCK_X, START_LINE + 12 + i*LINE_OFFSET , 12*list->listItems[i].itemName.length(), 2, GxEPD_BLACK);
         }
       }
-    } else {
-      display.print("No items");
+      while(display.nextPage());
     }
+  } else {
+    // display.setPartialWindow(BLOCK_X, START_ITEM, DISPLAY_WIDTH, BLOCK_H);
+    // display.firstPage();
+    // do{
+    //   display.setCursor(BLOCK_X, START_ITEM);
+    //   display.print("No items");
+    // }
+    // while(display.nextPage());
   }
-  while (display.nextPage());
 }
 
 void clearSyncedList(t_displayList *list) {
@@ -111,7 +146,7 @@ void epaperInit() {
   display.setFullWindow();
 
   // Draw page outline
-  drawList(syncedList);
+  drawEmptyList();
   Serial.println("Display ready");  
 }
 #endif //__EPAPER_H_
